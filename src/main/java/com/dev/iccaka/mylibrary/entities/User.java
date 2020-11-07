@@ -3,8 +3,8 @@ package com.dev.iccaka.mylibrary.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name="users")
-public class Users {
+@Table(name = "users")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,9 +25,9 @@ public class Users {
     @Column(name = "password")
     private String password;
 
-    public Users(){ }
+    public User(){ }
 
-    public Users(String username, String firstname, String lastname, String email, String password) {
+    public User(String username, String firstname, String lastname, String email, String password) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;

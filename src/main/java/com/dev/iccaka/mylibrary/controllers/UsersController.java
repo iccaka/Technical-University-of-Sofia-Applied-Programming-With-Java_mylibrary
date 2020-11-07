@@ -1,6 +1,6 @@
 package com.dev.iccaka.mylibrary.controllers;
 
-import com.dev.iccaka.mylibrary.entities.Users;
+import com.dev.iccaka.mylibrary.entities.User;
 import com.dev.iccaka.mylibrary.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ public class UsersController {
     UsersRepository usersRepository;
 
     @GetMapping("/all")
-    public List<Users> getUsers(){
+    public List<User> getUsers(){
         return usersRepository.findAll();
     }
 
