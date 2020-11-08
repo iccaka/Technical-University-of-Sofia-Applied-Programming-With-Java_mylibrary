@@ -36,4 +36,8 @@ public class UsersController {
         return result;
     }
 
+    @GetMapping("/search/firstname")
+    public User findUserByFirstName(@RequestParam String firstname){
+        return usersRepository.findUserByFirstname(firstname);
+    }
 }
