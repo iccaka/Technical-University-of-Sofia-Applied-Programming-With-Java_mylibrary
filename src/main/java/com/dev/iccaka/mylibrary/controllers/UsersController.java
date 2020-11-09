@@ -3,10 +3,8 @@ package com.dev.iccaka.mylibrary.controllers;
 import com.dev.iccaka.mylibrary.entities.User;
 import com.dev.iccaka.mylibrary.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,5 +37,15 @@ public class UsersController {
     @GetMapping("/search/firstname")
     public User findUserByFirstName(@RequestParam String firstname){
         return usersRepository.findUserByFirstname(firstname.toLowerCase());
+    }
+
+    @DeleteMapping("/delete/id")
+    public ResponseEntity<?> deleteUserById(@RequestParam(required = false) Long id){
+        if(!usersRepository.existsById(id)){
+            return ResponseEntity.ok("There's no such user.");
+        }
+
+        usersRepository.deleteById(id);
+        return ResponseEntity.ok("Deleted successfully.");
     }
 }
