@@ -38,6 +38,6 @@ public class UsersController {
 
     @GetMapping("/search/firstname")
     public User findUserByFirstName(@RequestParam String firstname){
-        return usersRepository.findUserByFirstname(firstname);
+        return usersRepository.findUserByFirstname(firstname.toLowerCase());
     }
 }
