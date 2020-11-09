@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -21,31 +22,41 @@ public class UsersController {
     }
 
     @GetMapping("/search/id")
-    public String findUserById(@RequestParam(required = false) Long id){
-        String result = null;
-
-        try{
-            result = usersRepository.findById(id).toString();
-        }
-        catch (Exception e){
-            return e.getClass().getName();
+    public ResponseEntity<?> findUserById(@RequestParam(required = false) Long id){
+        if(id < 0){
+            return ResponseEntity.ok("Ids cannot be negative numbers.");
         }
 
-        return result;
+        Optional<User> result = usersRepository.findById(id);
+
+        return result.isPresent() ? ResponseEntity.ok(result) : ResponseEntity.ok("There's no user with such id.");
     }
 
     @GetMapping("/search/firstname")
-    public User findUserByFirstName(@RequestParam String firstname){
-        return usersRepository.findUserByFirstname(firstname.toLowerCase());
+    public ResponseEntity<?> findUserByFirstName(@RequestParam String firstname){
+        if(firstname.isBlank() || firstname == null){
+            return ResponseEntity.ok().body("You haven't entered anything to search for.");
+        }
+
+        Optional<User> result = usersRepository.findUserByFirstname(firstname.toLowerCase());
+
+        return result.isPresent() ? ResponseEntity.ok(result) : ResponseEntity.ok("There's no user with such first name.");
     }
 
     @DeleteMapping("/delete/id")
-    public ResponseEntity<?> deleteUserById(@RequestParam(required = false) Long id){
+    public ResponseEntity<?> deleteUserById(@RequestParam Long id){
         if(!usersRepository.existsById(id)){
             return ResponseEntity.ok("There's no such user.");
         }
 
         usersRepository.deleteById(id);
+        return ResponseEntity.ok("Deleted successfully.");
+    }
+
+    @DeleteMapping("/delete/firstname")
+    public ResponseEntity<?> deleteUserByFirstName(@RequestParam String firstname){
+        usersRepository.findUserByFirstname(firstname.toLowerCase()).ifPresent(user -> usersRepository.delete(user));
+
         return ResponseEntity.ok("Deleted successfully.");
     }
 }
