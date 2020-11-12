@@ -10,9 +10,9 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-//    @JoinColumn(name = "users_id")
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    private User userid;
+    @OneToOne()
+    @JoinColumn(name = "userid")
+    private User userid;
 
     @Column(name = "name")
     private String name;
@@ -32,7 +32,7 @@ public class Book {
 
     public Book(Long id, User userid, String name, String isbn, Integer year, String description) {
         this.id = id;
-//        this.userid = userid;
+        this.userid = userid;
         this.name = name;
         this.isbn = isbn;
         this.year = year;
@@ -47,13 +47,13 @@ public class Book {
         this.id = id;
     }
 
-//    public User getUserid() {
-//        return this.userid;
-//    }
-//
-//    public void setUserid(User userid) {
-//        this.userid = userid;
-//    }
+    public User getUserid() {
+        return this.userid;
+    }
+
+    public void setUserid(User userid) {
+        this.userid = userid;
+    }
 
     public String getName() {
         return this.name;
