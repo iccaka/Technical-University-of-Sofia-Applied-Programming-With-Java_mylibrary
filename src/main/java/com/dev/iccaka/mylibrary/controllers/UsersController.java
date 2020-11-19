@@ -50,7 +50,7 @@ public class UsersController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<?> saveUser(@RequestParam(required = false) Long id,
+    public ResponseEntity<?> saveOrUpdateUser(@RequestParam(required = false) Long id,
                                      @RequestParam(required = false) String username,
                                      @RequestParam(required = false) String firstname,
                                      @RequestParam(required = false) String lastname,
