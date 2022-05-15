@@ -1,4 +1,4 @@
-# Technical-University-of-Sofia-mylibrary
+# Technical-University-of-Sofia-Applied-Programming-With-Java_mylibrary
 
 *A remake of my original website([MyLibrary](https://github.com/iccaka/MyLibrary)) which used HTML/CSS/JS+JQuery for front end and FireBase as a database. This time, the purpose of creating this website, is for us to learn how to use Spring and get comfortable with the whole architecture(database(relational, Postgres) -> JDBC -> ORM(Hibernate) -> API)*
 
